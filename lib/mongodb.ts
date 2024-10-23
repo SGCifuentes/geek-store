@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MongoClient } from 'mongodb';
 
 const url = process.env.MONGODB_URL as string;
@@ -9,11 +10,11 @@ if (!process.env.MONGODB_URL) {
 }
 
 if (process.env.NODE_ENV === 'development') {
-  if (!global._mongoClientPromise) {
+  if (!(global as any)._mongoClientPromise) {
     client = new MongoClient(url);
-    global._mongoClientPromise = client.connect();
+    (global as any)._mongoClientPromise = client.connect();
   }
-  clientPromise = global._mongoClientPromise;
+  clientPromise = (global as any)._mongoClientPromise;
 } else {
   client = new MongoClient(url);
   clientPromise = client.connect();

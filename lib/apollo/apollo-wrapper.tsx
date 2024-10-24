@@ -9,7 +9,7 @@ import {
 function makeClient() {
   return new ApolloClient({
     cache: new InMemoryCache(),
-    uri: `/api/graphql`
+    uri: `${process.env.URL}/api/graphql`
   });
 }
 

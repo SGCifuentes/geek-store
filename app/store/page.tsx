@@ -1,7 +1,6 @@
 import Product from '@/components/Product';
 // import { getClient } from '@/lib/apollo/client';
 // import { gql } from '@apollo/client';
-
 interface product {
   id: string;
   name: string;
@@ -24,6 +23,7 @@ export default async function StorePage() {
   // const client = getClient();
   // const { data } = await client.query({ query: GET_PRODUCTS });
 
+  // const products: product[] = data.products;
   const products: product[] = [];
 
   return (

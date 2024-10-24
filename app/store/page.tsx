@@ -1,6 +1,6 @@
 import Product from '@/components/Product';
-// import { getClient } from '@/lib/apollo/client';
-// import { gql } from '@apollo/client';
+import { getClient } from '@/lib/apollo/client';
+import { gql } from '@apollo/client';
 interface product {
   id: string;
   name: string;
@@ -8,23 +8,22 @@ interface product {
   image: string;
 }
 
-// const GET_PRODUCTS = gql`
-//   query GetProducts {
-//     products {
-//       id
-//       name
-//       price
-//       image
-//     }
-//   }
-// `;
+const GET_PRODUCTS = gql`
+  query GetProducts {
+    products {
+      id
+      name
+      price
+      image
+    }
+  }
+`;
 
 export default async function StorePage() {
-  // const client = getClient();
-  // const { data } = await client.query({ query: GET_PRODUCTS });
+  const client = getClient();
+  const { data } = await client.query({ query: GET_PRODUCTS });
 
-  // const products: product[] = data.products;
-  const products: product[] = [];
+  const products: product[] = data.products;
 
   return (
     <div className='bg-white'>

@@ -22,10 +22,7 @@ interface product {
 
 export default async function StorePage() {
   // const client = getClient();
-
-  // const { data } = await client.query({
-  //   query: GET_PRODUCTS
-  // });
+  // const { data } = await client.query({ query: GET_PRODUCTS });
 
   const products: product[] = [];
 

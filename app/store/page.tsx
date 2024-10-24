@@ -21,15 +21,13 @@ const GET_PRODUCTS = gql`
 `;
 
 export default async function StorePage() {
-  const client = getClient();
+  // const client = getClient();
 
-  const { data } = await client.query({
-    query: GET_PRODUCTS
-  });
+  // const { data } = await client.query({
+  //   query: GET_PRODUCTS
+  // });
 
-  if (!data) return <></>;
-
-  const products: product[] = data.products;
+  const products: product[] = [];
 
   return (
     <div className='bg-white'>

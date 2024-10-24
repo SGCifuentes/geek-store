@@ -7,6 +7,7 @@ interface Product {
   description?: string;
   price: number;
   inStock: boolean;
+  image: string;
 }
 
 interface QueryArgs {
@@ -28,7 +29,8 @@ export const resolvers = {
         name: product.name,
         description: product.description,
         price: product.price,
-        inStock: product.inStock
+        inStock: product.inStock,
+        image: product.image
       }));
     },
     product: async (_: unknown, { id }: QueryArgs): Promise<Product | null> => {
@@ -43,14 +45,21 @@ export const resolvers = {
         name: product.name,
         description: product.description,
         price: product.price,
-        inStock: product.inStock
+        inStock: product.inStock,
+        image: product.image
       };
     }
   },
   Mutation: {
     addProduct: async (
       _: unknown,
-      { name = '', description, price = 0, inStock = false }: MutationArgs
+      {
+        name = '',
+        description,
+        price = 0,
+        inStock = false,
+        image = ''
+      }: MutationArgs
     ): Promise<Product> => {
       const client = await clientPromise;
       const db = client.db('ecommerce');
@@ -62,12 +71,13 @@ export const resolvers = {
         name,
         description,
         price,
-        inStock
+        inStock,
+        image
       };
     },
     updateProduct: async (
       _: unknown,
-      { id, name, description, price, inStock }: MutationArgs
+      { id, name, description, price, inStock, image }: MutationArgs
     ): Promise<Product | null> => {
       const client = await clientPromise;
       const db = client.db('ecommerce');
@@ -75,7 +85,7 @@ export const resolvers = {
         .collection('products')
         .findOneAndUpdate(
           { _id: new ObjectId(id) },
-          { $set: { name, description, price, inStock } },
+          { $set: { name, description, price, inStock, image } },
           { returnDocument: 'after' }
         );
       if (!result?.value) return null;
@@ -84,7 +94,8 @@ export const resolvers = {
         name: result.value.name,
         description: result.value.description,
         price: result.value.price,
-        inStock: result.value.inStock
+        inStock: result.value.inStock,
+        image: result.value.image
       };
     },
     deleteProduct: async (_: unknown, { id }: QueryArgs): Promise<boolean> => {

@@ -7,6 +7,7 @@ export const typeDefs = gql`
     description: String
     price: Float!
     inStock: Boolean!
+    image: String!
   }
 
   type Query {
@@ -20,6 +21,7 @@ export const typeDefs = gql`
       description: String
       price: Float!
       inStock: Boolean!
+      image: String!
     ): Product!
     updateProduct(
       id: ID!
@@ -27,6 +29,7 @@ export const typeDefs = gql`
       description: String
       price: Float
       inStock: Boolean
+      image: String
     ): Product!
     deleteProduct(id: ID!): Boolean!
   }

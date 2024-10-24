@@ -5,7 +5,7 @@ import { gql } from '@apollo/client';
 interface product {
   id: string;
   name: string;
-  price: string;
+  price: number;
   image: string;
 }
 
@@ -31,7 +31,7 @@ export default async function StorePage() {
 
   if (!data) return <></>;
 
-  const products: product[] = await data.products;
+  const products: product[] = data.products;
   console.log('products => ', products);
 
   return (

@@ -4,7 +4,7 @@ interface productProps {
   product: {
     id: string;
     name: string;
-    price: string;
+    price: number;
     image: string;
   };
 }

@@ -1,5 +1,8 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client-react-streaming';
-import { registerApolloClient } from '@apollo/experimental-nextjs-app-support';
+import {
+  ApolloClient,
+  InMemoryCache,
+  registerApolloClient
+} from '@apollo/experimental-nextjs-app-support';
 
 export const { getClient } = registerApolloClient(() => {
   return new ApolloClient({

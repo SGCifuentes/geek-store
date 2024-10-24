@@ -1,3 +1,4 @@
+import { ApolloWrapper } from '@/lib/apollo/apollo-wrapper';
 import type { Metadata } from 'next';
 import '../styles/globals.css';
 
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className='antialiased'>{children}</body>
+      <body className='antialiased'>
+        <ApolloWrapper>{children}</ApolloWrapper>
+      </body>
     </html>
   );
 }

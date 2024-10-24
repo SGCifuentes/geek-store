@@ -22,12 +22,17 @@ const GET_PRODUCTS = gql`
 
 export default async function StorePage() {
   const client = getClient();
+  console.log('Client => ', client);
+
   const { data } = await client.query({
     query: GET_PRODUCTS
   });
+  console.log('Data => ', data);
+
+  if (!data) return <></>;
 
   const products: product[] = await data.products;
-  console.log(products);
+  console.log('products => ', products);
 
   return (
     <div className='bg-white'>

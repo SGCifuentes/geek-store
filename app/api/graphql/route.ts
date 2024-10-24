@@ -4,12 +4,19 @@ import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import { NextRequest } from 'next/server';
 
-const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers
-});
+let apolloServer: ApolloServer | null = null;
 
-const handler = startServerAndCreateNextHandler<NextRequest>(apolloServer, {
+const getApolloServer = () => {
+  if (!apolloServer) {
+    apolloServer = new ApolloServer({
+      typeDefs,
+      resolvers
+    });
+  }
+  return apolloServer;
+};
+
+const handler = startServerAndCreateNextHandler<NextRequest>(getApolloServer(), {
   context: async (req) => ({ req })
 });
 

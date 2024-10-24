@@ -1,7 +1,6 @@
 import Product from '@/components/Product';
+import { ApolloClient, gql, HttpLink, InMemoryCache } from '@apollo/client';
 // import { getClient } from '@/lib/apollo/client';
-// import { gql } from '@apollo/client';
-
 interface product {
   id: string;
   name: string;
@@ -9,22 +8,32 @@ interface product {
   image: string;
 }
 
-// const GET_PRODUCTS = gql`
-//   query GetProducts {
-//     products {
-//       id
-//       name
-//       price
-//       image
-//     }
-//   }
-// `;
+const GET_PRODUCTS = gql`
+  query GetProducts {
+    products {
+      id
+      name
+      price
+      image
+    }
+  }
+`;
+const httpLink = new HttpLink({
+  uri: `${process.env.URL}/api/graphql`,
+  fetchOptions: {
+    timeout: 60000 // 60 segundos de timeout
+  }
+});
 
 export default async function StorePage() {
+  const client = new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache()
+  });
   // const client = getClient();
-  // const { data } = await client.query({ query: GET_PRODUCTS });
+  const { data } = await client.query({ query: GET_PRODUCTS });
 
-  const products: product[] = [];
+  const products: product[] = data.products;
 
   return (
     <div className='bg-white'>

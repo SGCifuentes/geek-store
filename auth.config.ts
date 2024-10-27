@@ -19,10 +19,8 @@ export const authConfig = {
       }
       return false;
     },
-    async redirect({ url, baseUrl }) {
-      if (url.startsWith('/admin')) return `${baseUrl}/${url}`;
-      else if (new URL(url).origin === baseUrl) return url;
-      return baseUrl;
+    async redirect() {
+      return '/admin/dashboard';
     }
   }
 } satisfies NextAuthConfig;
